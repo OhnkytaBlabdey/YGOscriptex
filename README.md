@@ -1,2 +1,2 @@
-# YGOscriptex
-一堆辣鸡脚本
+# YGO的script大概
+一堆脚本
