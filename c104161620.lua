@@ -18,6 +18,7 @@ zt[m][n]=val
 
 end
 function zoneget(zt,m,n)
+--return cardid
 if not zt then return end 
 if not zt[m] then zt[m]={} end
 
@@ -28,6 +29,30 @@ end
 function zoneclearcards(cards,zt)
 --依据cards清除zt里的变为-1
 -------------------------------------------
+if not zt or not cards then return end 
+for i=1,#cards do 
+local c=cards[i]
+local m,n=cardtozone(zt, c )
+zonewrite(zt,m,n, -1 )
+end
+
+
+-- if not zt[1] then return end 
+--local m = #zt
+-- local n
+-- for i=1,m do 
+ -- if zt[i] and #zt[i]>0 then 
+-- n= #zt[i]
+ -- end
+
+-- end
+
+-- local cid=zoneget(zt,mi,n)
+--
+
+
+
+
 
 end
 function AddCard(pl,code,loc,seq,pos)
@@ -92,7 +117,21 @@ return cidtozone(zt,cid)
 end
 function existcard(cards,c)
 -------------------------------------------
+if not cards or not c then return end 
+local result =false
 
+for i=1,#cards do 
+if cardid[i].cardid == c.cardid then 
+result = true
+
+end
+
+i=i+1
+end
+
+
+
+return result
 end
 function filtcardid(cs,c)
 if not cs or not c then return end
@@ -175,35 +214,43 @@ end
 function cardtoaffectedcard(c,k)
 local result_cs={}
 if k==1 then
-local cs_tmp={}
-local ar={}
-ar=getaroundcard(c)
-local ct=#ar
---遍历ar
-do
+--check if k is "clear by id"
+local cs_tmp = {}
+local ar = {}
+ar = getaroundcard(c)
+local ct = #ar
+cs_tmp = ar
+
+  do
 -------------------------------------------
+--遍历ar,renew ar 
+	for i =1,ct do 
+	
+	
+	end
 
 
-if #ar ==ct then 
 
+
+ if #ar == ct then 
 	return result_cs
-else
-ct=#ar
-end
+ else
+ ct = #ar
+ end
+
+  end
+
+
+
 
 end
-
-
-
-
-end
-return result_cs
+--return result_cs
 
 
 end
 function clearzone(c)
 local cs=cardtoaffectedcard(c)
---zoneclearcards(cs,zt)
+zoneclearcards(cs,zt)
 -------------------------------------------
 
 
@@ -221,7 +268,7 @@ Duel.SendtoDeck(g0,nil,2,REASON_RULE)
 
 end
 function fillzone()
-
+-------------------------------------------
 end 
 
 
